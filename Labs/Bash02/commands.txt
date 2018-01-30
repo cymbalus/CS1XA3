@@ -1,0 +1,2 @@
+ find Rdatasets/ -name "[A,a]*.csv" | wc -l
+ find Rdatasets/ -name "[C,c]*.csv" -exec cp {} CFiles \;
