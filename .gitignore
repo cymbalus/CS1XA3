@@ -4,3 +4,7 @@ Bash02.hs
 RDatasets
 DFiles
 HFolders
+dist
+node_modules
+elm-stuff
+repl-temp-*
