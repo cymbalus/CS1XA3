@@ -9,7 +9,7 @@ import View exposing (view)
 {- Subscriptions -}
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+  Sub.none
 
 {- Main -}
 main : Program Never Model Msg

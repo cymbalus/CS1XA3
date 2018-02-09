@@ -9,4 +9,4 @@ update msg model =
         Msgs.None ->
           (model, Cmd.none)
         Msgs.Click ->
-          ({ model | counter = model.counter + 1 }, Cmd.none)
+          ({ model | loc_counter = model.loc_counter + 1 }, Cmd.none)
