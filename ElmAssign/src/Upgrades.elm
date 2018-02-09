@@ -1,9 +1,9 @@
 module Upgrades exposing (..)
 
-import Clickers exposing (Clicker)
+import Types exposing (..)
+import Clickers
 
-type Upgrade = Ubuntu | Emacs | Coffee
-
+list : List Upgrade
 list = [
   Ubuntu
   , Emacs
@@ -17,4 +17,13 @@ modifiers upgrade = case upgrade of
   Emacs ->
     (Clickers.list, 0.5)
   Coffee ->
-    ([Clickers.UndergradStudent, Clickers.GradStudent], 0.2)
+    ([UndergradStudent, GradStudent], 0.2)
+
+cost : Upgrade -> Int
+cost upgrade = case upgrade of
+  Ubuntu ->
+    100
+  Emacs ->
+    100
+  Coffee ->
+    1000

@@ -1,3 +1,8 @@
 module Msgs exposing (..)
 
-type Msg = None | Click
+import Types exposing (..)
+
+type Msg =
+  None
+  | Click
+  | Purchase ShopItem

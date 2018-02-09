@@ -1,11 +1,13 @@
 module View exposing (..)
 
 import Html exposing (..)
-import List
 import Html.Events exposing (onClick)
+import Html.Attributes exposing (disabled)
 import Models exposing (Model)
-import Clickers exposing (Clicker, ClickerData)
 import Msgs exposing (Msg)
+import Shop
+import Clickers
+import Types exposing (..)
 
 {-
 Temporary view for testing purposes
@@ -20,15 +22,17 @@ view model =
         , button [ onClick Msgs.Click ] [ text "+" ]
         , br [] []
         , div []
-            (List.map clickerDiv model.clickers)
+            (List.map (clickerDiv model) model.clickers)
       ]
 
-clickerDiv : ClickerData -> Html Msg
-clickerDiv (c, q, m) =
+clickerDiv : Model -> ClickerData -> Html Msg
+clickerDiv model (c, q, m) =
   div []
-      [ text ((toString c) ++ " | Q: " ++ (toString q) ++ " M: " ++ (toString m))
+      [ text ((toString c) ++ " |#| Cost: " ++ (toString (Clickers.cost c q)) ++ " Q: " ++ (toString q) ++ " M: " ++ (toString m))
       , br [] []
-      , button [] [text "Buy"]
+      , button [ disabled (not (Shop.canAfford model (ClickerItem c)))
+               , onClick (Msgs.Purchase (ClickerItem c)) ]
+               [ text "Buy" ]
       , br [] []
       , br [] []
       ]

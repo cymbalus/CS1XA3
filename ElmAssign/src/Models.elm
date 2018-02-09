@@ -2,14 +2,16 @@ module Models exposing (..)
 
 import List exposing (map)
 import Msgs exposing (Msg)
-import Clickers exposing (Clicker, ClickerData, earnings)
-import Upgrades exposing (Upgrade, modifiers)
+import Clickers exposing (earnings)
+import Upgrades exposing (modifiers)
+import Types exposing (Clicker, Upgrade, ClickerData)
 
 type alias Model =
   { loc_counter : Float
   , clickers : List ClickerData
   , multiplier : Float
   , remaining_upgrades : List Upgrade
+  , active_upgrades : List Upgrade
   }
 
 init : ( Model, Cmd Msg )
@@ -18,6 +20,7 @@ init =
    , clickers = Clickers.init
    , multiplier = 1.0
    , remaining_upgrades = Upgrades.list
+   , active_upgrades = []
   }, Cmd.none)
 
 clickerData : Model -> Clicker -> Maybe ClickerData
@@ -45,13 +48,12 @@ clickerEarnings model clicker =
       Just (c, q, m) ->
         (earnings c) * m * (toFloat q)
 
+applyUpgrade : Model -> Upgrade -> Model
+applyUpgrade model upgrade =
+  applyModifiers model (modifiers upgrade)
 
-applyUpgrade : Upgrade -> Model -> Model
-applyUpgrade upgrade model =
-  applyModifiers (modifiers upgrade) model
-
-applyModifiers : (List Clicker, Float) -> Model -> Model
-applyModifiers modifiers model = case modifiers of
+applyModifiers : Model -> (List Clicker, Float) -> Model
+applyModifiers model modifiers = case modifiers of
   ([], _) ->
     model
   ((c::cs), multiplier) ->
@@ -67,4 +69,4 @@ applyModifiers modifiers model = case modifiers of
           else
             entry
     in
-      applyModifiers (cs, multiplier) { model | clickers = map (updateClicker c multiplier) model.clickers }
+      applyModifiers { model | clickers = map (updateClicker c multiplier) model.clickers } (cs, multiplier)

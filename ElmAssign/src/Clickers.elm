@@ -1,17 +1,7 @@
 module Clickers exposing (..)
 
 import List exposing (map)
-
-type Clicker =
-  Macro
-  | BashScript
-  | UndergradStudent
-  | GradStudent
-  | Professor
-  | ResearchTeam
-  | AGI
-
-type alias ClickerData = (Clicker, Int, Float)
+import Types exposing (..)
 
 list = [
   Macro
@@ -25,6 +15,15 @@ list = [
 
 init : List ClickerData
 init = map (\c -> (c, 0, 1.0)) list
+
+clicker : ClickerData -> Clicker
+clicker (c, _, _) = c
+
+quantity : ClickerData -> Int
+quantity (_, q, _) = q
+
+multiplier : ClickerData -> Float
+multiplier (_, _, m) = m
 
 {-| Returns the friendly name of a Clicker.
 Either in the plural (True) or singular (False) form
