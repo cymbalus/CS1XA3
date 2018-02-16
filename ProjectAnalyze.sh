@@ -11,7 +11,8 @@ then
 		echo "Changes saved to changes.txt"
 	elif [ "$1" = "todo" ]
 	then
-		echo todo
+		$(sh ProjectAnalyze/bin/todo.sh)
+		echo "Todo lines saved to todo.log"
 	elif [ "$1" = "haskell-errors" ]
 	then	
 		echo haskell errors	
