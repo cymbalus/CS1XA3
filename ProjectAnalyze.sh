@@ -4,10 +4,11 @@ if [ $# -gt 0 ]
 then
 	if [ "$1" = "compare-remote" ]
 	then
-		echo $(sh ProjectAnalyze/bin/compare-remote.sh ${@:2})
+		echo $(sh ProjectAnalyze/bin/compare-remote.sh)
 	elif [ "$1" = "changes" ]
 	then
-		echo changes
+		echo "$(sh ProjectAnalyze/bin/changes.sh ${@:2})" > "changes.txt"
+		echo "Changes saved to changes.txt"
 	elif [ "$1" = "todo" ]
 	then
 		echo todo
