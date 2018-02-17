@@ -98,6 +98,6 @@ cardHeader =
 
 card =
   [ ("border", "0")
-  , ("background-color", darkTheme.sidebar)
+  , ("background-color", darkTheme.background)
   , ("border-bottom", "1px solid " ++ darkTheme.text)
   ]

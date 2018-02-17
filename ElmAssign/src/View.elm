@@ -92,25 +92,27 @@ clickerAccordion model =
     Accordion.config Msgs.ClickerAccordion
       |> Accordion.withAnimation
       |> Accordion.cards
-        [ Accordion.card
-          { id = "card1"
-          , options = [Card.attrs [style card]]
-          , header =
-              Accordion.header [style cardHeader] <| Accordion.toggle [] [ text "Card 1" ]
-          , blocks =
-              [ Accordion.block []
-                  [ Card.text [] [ text "Lorem ipsum etc" ] ]
-              ]
-          }
-        , Accordion.card
-          { id = "card2"
-          , options = [Card.attrs [style card]]
-          , header =
-            Accordion.header [style cardHeader] <| Accordion.toggle [] [ text "Card 2" ]
-          , blocks =
-              [ Accordion.block []
-                  [ Card.text [] [ text "Lorem ipsum etc" ] ]
-              ]
-          }
-        ]
+        (List.map (clickerCard model) model.clickers)
       |> Accordion.view model.gui.clickerAccordion
+
+clickerCard : Model -> ClickerData -> Accordion.Card Msg
+clickerCard model (c, q, m) =
+  Accordion.card
+    { id = Clickers.name c False
+    , options = [Card.attrs [style card]]
+    , header =
+        Accordion.header [style cardHeader] <| Accordion.toggle []
+          [ text (Clickers.name c False)
+          , span [style [("float", "right")]]
+              [ text (toString q) ]
+          ]
+    , blocks =
+        [ Accordion.block []
+            [ Card.text []
+              [ button [ disabled (not (Shop.canAfford model (ClickerItem c)))
+                       , onClick (Msgs.Purchase (ClickerItem c)) ]
+                       [ text "Buy" ]
+              ]
+            ]
+        ]
+    }
