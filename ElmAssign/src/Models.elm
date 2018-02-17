@@ -5,6 +5,7 @@ import Msgs exposing (Msg)
 import Clickers exposing (earnings)
 import Upgrades exposing (modifiers)
 import Types exposing (Clicker, Upgrade, ClickerData)
+import Time exposing (Time)
 
 type alias Model =
   { loc_counter : Float
@@ -47,6 +48,10 @@ clickerEarnings model clicker =
         0.0
       Just (c, q, m) ->
         (earnings c) * m * (toFloat q)
+
+totalEarnings : Model -> Time -> Float
+totalEarnings model interval = List.sum
+  (List.map (\(c, q, m) -> (earnings c) * m * (toFloat q) * (interval / Time.second)) model.clickers)
 
 applyUpgrade : Model -> Upgrade -> Model
 applyUpgrade model upgrade =
