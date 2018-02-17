@@ -3,6 +3,7 @@ module View exposing (..)
 import Html exposing (..)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
+import Time exposing (Time, second)
 import Models exposing (Model)
 import Msgs exposing (Msg)
 import Shop
@@ -10,9 +11,14 @@ import Clickers
 import Types exposing (..)
 import Styles exposing (..)
 
+import FormatNumber exposing (format)
+import FormatNumber.Locales exposing (usLocale)
+
 import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Row as Row
 import Bootstrap.Grid.Col as Col
+import Bootstrap.Accordion as Accordion
+import Bootstrap.Card as Card
 
 
 {-
@@ -22,48 +28,46 @@ Temporary view for testing purposes
 
 view : Model -> Html Msg
 view model =
-  div []
+  div [style [("margin", "0px"), ("padding", "0px")]]
       [ Grid.container [style gridContainer]
-        [ Grid.row []
-            [ Grid.col [Col.xs2, Col.attrs [style sideCol]] [ text "One of Three columns" ]
+        [ Grid.row [Row.attrs [style [("margin", "0px"), ("padding", "0px")]]]
+            [ Grid.col [Col.xs2, Col.attrs [style sideCol]]
+                [ clickerTitle
+                , clickerAccordion model
+                ]
             , Grid.col [Col.xs8, Col.attrs [style gridCol]] [ centerDiv model ]
             , Grid.col [Col.xs2, Col.attrs [style sideCol]] [ text "One of Three columns" ]
             ]
         ]
+      , earningsPanel model
       ]
 
 centerDiv : Model -> Html Msg
 centerDiv model =
   div []
-      [img [src "img/curtis-idle.png", style curtisImg] []]
-{-
-
-view model =
-  div []
-      [ div []
-          [
-            h1 [] [text (toString (round model.loc_counter))]
-          ]
-        , button [ onClick Msgs.Click ] [ text "+" ]
-        , br [] []
-        , div []
-            (List.map (clickerDiv model) model.clickers)
-        , gridTestDiv
+      [ p [style locRateText] [text ((format usLocale (Models.totalEarnings model second)) ++ " LoC/s")]
+      , img [src "img/curtis-idle.png", style curtisImg, onClick Msgs.Click] []
       ]
--}
 
-gridTestDiv : Html Msg
-gridTestDiv =
-  Grid.row [ Row.centerXs ]
-    [ Grid.col [ Col.xs2 ]
-        [ text "Col 1" ]
-    , Grid.col [ Col.xs2 ]
-        [ text "Col 2" ]
-    , Grid.col [ Col.xs2 ]
-        [ text "Col 3" ]
-    , Grid.col [ Col.xs2 ]
-        [ text "Col 4" ]
+earningsPanel : Model -> Html Msg
+earningsPanel model =
+  div [style earningPanelDiv]
+      [ Grid.container [style gridContainer]
+        [ Grid.row [Row.centerXs, Row.attrs [style [("margin", "0px"), ("padding", "0px")]]]
+            (List.map (earningCol model) (Models.formattedEarnings model))
+        ]
+      ]
+
+earningCol : Model -> (String, String, Int, String) -> Grid.Column Msg
+earningCol model (title, titles, amt, image) =
+  Grid.col [Col.xs1, Col.attrs [style earningColumn]]
+    [ div []
+        [ img [src ("img/earning_icons/" ++ image ++ ".png"), width 50, height 50, style earningIcon] []
+        , div []
+            [p [style earningText] [text (toString (amt))]]
+        ]
     ]
+
 
 clickerDiv : Model -> ClickerData -> Html Msg
 clickerDiv model (c, q, m) =
@@ -76,3 +80,37 @@ clickerDiv model (c, q, m) =
       , br [] []
       , br [] []
       ]
+
+clickerTitle : Html Msg
+clickerTitle =
+  div [style sideTitleDiv]
+      [ p [style sideTitleText] [text "Auto Clickers"]
+      ]
+
+clickerAccordion : Model -> Html Msg
+clickerAccordion model =
+    Accordion.config Msgs.ClickerAccordion
+      |> Accordion.withAnimation
+      |> Accordion.cards
+        [ Accordion.card
+          { id = "card1"
+          , options = [Card.attrs [style card]]
+          , header =
+              Accordion.header [style cardHeader] <| Accordion.toggle [] [ text "Card 1" ]
+          , blocks =
+              [ Accordion.block []
+                  [ Card.text [] [ text "Lorem ipsum etc" ] ]
+              ]
+          }
+        , Accordion.card
+          { id = "card2"
+          , options = [Card.attrs [style card]]
+          , header =
+            Accordion.header [style cardHeader] <| Accordion.toggle [] [ text "Card 2" ]
+          , blocks =
+              [ Accordion.block []
+                  [ Card.text [] [ text "Lorem ipsum etc" ] ]
+              ]
+          }
+        ]
+      |> Accordion.view model.gui.clickerAccordion

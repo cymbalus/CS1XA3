@@ -6,14 +6,18 @@ import Models exposing (Model, init)
 import Update exposing (update)
 import View exposing (view)
 import Time exposing (Time, second)
+import Bootstrap.Accordion as Accordion
 
 tickRate : Time
 tickRate = second / 30
 
 {- Subscriptions -}
 subscriptions : Model -> Sub Msg
-subscriptions model =
-  Time.every tickRate (Msgs.Tick tickRate)
+subscriptions model = Sub.batch
+  [ Time.every tickRate (Msgs.Tick tickRate)
+  , Accordion.subscriptions model.gui.clickerAccordion Msgs.ClickerAccordion
+  , Accordion.subscriptions model.gui.upgradeAccordion Msgs.UpgradeAccordion
+  ]
 
 {- Main -}
 main : Program Never Model Msg

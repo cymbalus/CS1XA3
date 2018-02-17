@@ -15,3 +15,15 @@ update msg model =
           ({ model | loc_counter = model.loc_counter + 1 }, Cmd.none)
         Msgs.Purchase item ->
           (Shop.purchase model item, Cmd.none)
+        Msgs.ClickerAccordion state ->
+          let
+            oldGui = model.gui
+            newGui = {oldGui | clickerAccordion = state}
+          in
+            ({ model | gui = newGui }, Cmd.none)
+        Msgs.UpgradeAccordion state ->
+          let
+            oldGui = model.gui
+            newGui = {oldGui | upgradeAccordion = state}
+          in
+            ({ model | gui = newGui }, Cmd.none)

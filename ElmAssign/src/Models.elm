@@ -6,6 +6,7 @@ import Clickers exposing (earnings)
 import Upgrades exposing (modifiers)
 import Types exposing (Clicker, Upgrade, ClickerData)
 import Time exposing (Time)
+import Bootstrap.Accordion as Accordion
 
 type alias Model =
   { loc_counter : Float
@@ -13,6 +14,10 @@ type alias Model =
   , multiplier : Float
   , remaining_upgrades : List Upgrade
   , active_upgrades : List Upgrade
+  , gui :
+    { clickerAccordion : Accordion.State
+    , upgradeAccordion : Accordion.State
+    }
   }
 
 init : ( Model, Cmd Msg )
@@ -22,6 +27,10 @@ init =
    , multiplier = 1.0
    , remaining_upgrades = Upgrades.list
    , active_upgrades = []
+   , gui =
+     { clickerAccordion = Accordion.initialState
+     , upgradeAccordion = Accordion.initialState
+     }
   }, Cmd.none)
 
 clickerData : Model -> Clicker -> Maybe ClickerData
@@ -52,6 +61,20 @@ clickerEarnings model clicker =
 totalEarnings : Model -> Time -> Float
 totalEarnings model interval = List.sum
   (List.map (\(c, q, m) -> (earnings c) * m * (toFloat q) * (interval / Time.second)) model.clickers)
+
+formattedEarnings : Model -> List (String, String, Int, String)
+formattedEarnings model =
+  let
+    locs = floor (model.loc_counter)
+  in
+    [ ("Line of code", "Lines of code",             (locs // 100^0) % 100, "loc")
+    , ("Resursive Function", "Resursive Functions", (locs // 100^1) % 100, "function")
+    , ("Haskell Program", "Haskell Programs",       (locs // 100^2) % 100, "haskell")
+    , ("Research Paper", "Research Papers",         (locs // 100^3) % 100, "research_paper")
+    , ("PhD Thesis", "PhD Theses",                  (locs // 100^4) % 100, "thesis")
+    , ("Turing Award", "Turing Awards",             (locs // 100^5) % 100, "turing_award")
+    ]
+
 
 applyUpgrade : Model -> Upgrade -> Model
 applyUpgrade model upgrade =
