@@ -25,6 +25,7 @@ then
 			while IFS='' read -r -d $'\0' file
 			do
 				echo "$(cat "$file")"
+				echo ""
 			done 
 	else
 		echo "Unknown argument: $1"

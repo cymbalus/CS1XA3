@@ -1,1 +1,17 @@
-Todo usage
+todo - USAGE INSTRUCTIONS
+
+	DESCRIPTION
+	
+		Searches all files for lines containing the specified todo pattern
+		and puts those lines into todo.log
+
+	COMMAND
+
+		./ProjectAnalyze.sh todo [pattern]
+
+	ARGUMENTS
+
+		[pattern] - OPTIONAL
+
+			Specifies the pattern to search for. Defaults to "#TODO"
+

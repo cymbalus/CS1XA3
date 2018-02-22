@@ -6,7 +6,7 @@ changes - USAGE INSTRUCTIONS
 	
 	COMMAND
 
-		./ProjectAnalyze changes [branch]
+		./ProjectAnalyze.sh changes [branch]
 
 	ARGUMENTS
 
