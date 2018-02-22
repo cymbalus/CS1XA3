@@ -7,19 +7,31 @@ then
 		echo $(sh ProjectAnalyze/bin/compare-remote.sh)
 	elif [ "$1" = "changes" ]
 	then
-		echo "$(sh ProjectAnalyze/bin/changes.sh ${@:2})" > "changes.txt"
-		echo "Changes saved to changes.txt"
+		echo "$(sh ProjectAnalyze/bin/changes.sh ${@:2})" > changes.log
+		echo "Changes saved to changes.log"
 	elif [ "$1" = "todo" ]
 	then
 		$(sh ProjectAnalyze/bin/todo.sh)
 		echo "Todo lines saved to todo.log"
 	elif [ "$1" = "haskell-errors" ]
 	then	
-		echo haskell errors	
+		echo "$(sh ProjectAnalyze/bin/haskell-errors.sh)" > /dev/null	
+		echo "Haskell errors saved to errors.log"
+	elif [ "$1" = "help" ]
+	then
+		cd ProjectAnalyze/usage
+		shopt -s nullglob
+		find . -name "*.txt" -print0 |
+			while IFS='' read -r -d $'\0' file
+			do
+				echo "$(cat "$file")"
+			done 
 	else
-		echo Unknown argument: $1	
+		echo "Unknown argument: $1"
+		echo "Use \"./ProjectAnalyze help\" for usage info"	
 	fi
 else
 	echo "Insufficient arguments"
+	echo "Use \"./ProjectAnalyze help\" for usage info"
 	exit
 fi

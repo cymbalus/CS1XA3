@@ -1,0 +1,2 @@
+test : Int
+test = "String"

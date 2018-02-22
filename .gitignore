@@ -4,5 +4,6 @@ Bash02.hs
 RDatasets
 DFiles
 HFolders
-changes.txt
+changes.log
 todo.log
+errors.log

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$(git fetch)
+$(git fetch) &> /dev/null
 
 echo $(git status | sed -n 2p )
 

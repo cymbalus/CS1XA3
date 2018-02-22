@@ -1,6 +1,5 @@
 #!/bin/bash
 
-DIFF=$(git diff --name-only)
 
 if [ -n "$DIFF" ]
 then
