@@ -17,6 +17,10 @@ then
 	then	
 		echo "$(sh ProjectAnalyze/bin/haskell-errors.sh)" > /dev/null	
 		echo "Haskell errors saved to errors.log"
+	elif [ "$1" = "usage-readme" ]
+	then
+		echo "$(sh ProjectAnalyze/bin/usage-readme.sh ${@:2})" > /dev/null
+		echo "Generated usage readme"
 	elif [ "$1" = "help" ]
 	then
 		cd ProjectAnalyze/usage
