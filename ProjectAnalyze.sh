@@ -11,7 +11,7 @@ then
 		echo "Changes saved to changes.log"
 	elif [ "$1" = "todo" ]
 	then
-		$(sh ProjectAnalyze/bin/todo.sh)
+		echo "$(sh ProjectAnalyze/bin/todo.sh ${@:2})" > /dev/null
 		echo "Todo lines saved to todo.log"
 	elif [ "$1" = "haskell-errors" ]
 	then	

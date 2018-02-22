@@ -1,1 +1,16 @@
-Changes usage
+changes - USAGE INSTRUCTIONS
+		
+	DESCRIPTION
+		
+		Uses 'git diff' to extract uncommitted changes and places them in changes.log
+	
+	COMMAND
+
+		./ProjectAnalyze changes [branch]
+
+	ARGUMENTS
+
+		branch - OPTIONAL
+
+			Specifies the branch the diff should be executed against. Defaults to active branch.
+
