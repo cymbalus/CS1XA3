@@ -11,7 +11,7 @@ todo - USAGE INSTRUCTIONS
 
 	ARGUMENTS
 
-		[pattern] - OPTIONAL
+		pattern - OPTIONAL
 
 			Specifies the pattern to search for. Defaults to "#TODO"
 

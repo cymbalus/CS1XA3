@@ -8,4 +8,4 @@ then
 fi
 
 echo -e "TODO as of $(date)\n" > "todo.log"
-grep -r --exclude=todo.log "$PATTERN" . >> "todo.log"
+grep -r --exclude=todo.log --exclude-dir="ProjectAnalyze" "$PATTERN" . >> "todo.log"

@@ -21,6 +21,12 @@ then
 	then
 		echo "$(sh ProjectAnalyze/bin/usage-readme.sh ${@:2})" > /dev/null
 		echo "Generated usage readme"
+	elif [ "$1" = "search" ]
+	then
+		sh ProjectAnalyze/bin/search.sh ${@:2}
+	elif [ "$1" = "summary" ]
+	then
+		sh ProjectAnalyze/bin/summary.sh
 	elif [ "$1" = "help" ]
 	then
 		cd ProjectAnalyze/usage

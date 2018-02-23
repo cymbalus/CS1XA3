@@ -29,6 +29,16 @@ Created for CS1XA3 2018
 
 		./ProjectAnalyze.sh compare-remote
 
+### summary - USAGE INSTRUCTIONS
+
+	DESCRIPTION
+
+		Displays various summary information about your project
+
+	COMMAND
+
+		./ProjectAnalyze.sh summary
+
 ### haskell-errors - USAGE INSTRUCTIONS
 
 	DESCRIPTION
@@ -53,7 +63,7 @@ Created for CS1XA3 2018
 
 	ARGUMENTS
 
-		[pattern] - OPTIONAL
+		pattern - OPTIONAL
 
 			Specifies the pattern to search for. Defaults to "#TODO"
 
@@ -72,3 +82,26 @@ Created for CS1XA3 2018
 		branch - OPTIONAL
 
 			Specifies the branch the diff should be executed against. Defaults to active branch.
+
+### search - USAGE INSTRUCTIONS (from gibsoj12)
+
+	DESCRIPTION
+
+		Searches through repository and finds all lines and/or files
+		that contain a given pattern.
+
+	COMMANND
+
+		./ProjectAnalyze.sh search <type> <pattern>
+
+	ARGUMENTS
+
+		type - REQUIRED
+		
+			Specifies if the output should contain found lines ("line") or just
+			file names ("file").
+
+		pattern - REQUIRED
+
+			A Regex pattern for grep to match with.
+ 
