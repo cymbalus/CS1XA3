@@ -7,7 +7,7 @@ then
 fi
 
 echo "# Assignment 1 Bash Script
-Created for CS1XA3 2018" > USAGE.md
+Created for CS1XA3 2018" > $FILE
 
 cd ProjectAnalyze/usage
 shopt -s nullglob

@@ -1,4 +1,5 @@
-#Assignment 1 directory
+# Assignment 1 Bash Script
+Created for CS1XA3 2018
 
 ### usage-readme - USAGE INSTRUCTIONS
 
