@@ -105,3 +105,15 @@ Created for CS1XA3 2018
 
 			A Regex pattern for grep to match with.
  
+
+### backup - USAGE INSTRUCTIONS
+
+	DESCRIPTION
+
+		Forget tar commands literally 5 seconds after using them? So does everyone else! (https://xkcd.com/1168/)
+		This command makes backing up your repo easy be zipping it in a timestamped .tar file and saving
+		it in ~/backups
+
+	COMMAND
+
+		./ProjectAnalyze.sh backup
