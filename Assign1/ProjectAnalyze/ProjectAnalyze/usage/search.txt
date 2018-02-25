@@ -1,0 +1,22 @@
+search - USAGE INSTRUCTIONS (from gibsoj12)
+
+	DESCRIPTION
+
+		Searches through repository and finds all lines and/or files
+		that contain a given pattern.
+
+	COMMANND
+
+		./ProjectAnalyze.sh search <type> <pattern>
+
+	ARGUMENTS
+
+		type - REQUIRED
+		
+			Specifies if the output should contain found lines ("line") or just
+			file names ("file").
+
+		pattern - REQUIRED
+
+			A Regex pattern for grep to match with.
+ 

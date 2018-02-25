@@ -1,0 +1,11 @@
+compare-remote - USAGE INSTRUCTIONS
+
+	DESCRIPTION
+
+		Utilizes 'git fetch' and 'git status' to check if your local branch
+		is up to date, behind, or ahead of the remote copy.
+
+	COMMANDS
+
+		./ProjectAnalyze.sh compare-remote
+

@@ -1,0 +1,11 @@
+chmod-sh - USAGE INSTRUCTIONS
+
+	DESCRIPTION
+
+		Searches for haskell (*.sh) files in the project directory and runs
+		chmod +x on them to make them executable.
+
+	COMMAND
+
+		./ProjectAnalyze.sh chmod-sh
+
