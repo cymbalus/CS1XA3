@@ -1,6 +1,15 @@
 # Assignment 1 Bash Script
 Created for CS1XA3 2018
 
+## Features
+* Eight useful commands for your project!
+* Detailed usage info for every command accessible though a help command
+* Commands support a number of options/flags
+* Made to be easy to execute manually, or as part of a script
+* Built with a modular approach! Simply drop a script in the bin folder to add it to ProjectAnalyze
+
+## Usage
+Everything below generated using the `usage-readme` command.
 ### usage-readme - USAGE INSTRUCTIONS
 
 	DESCRIPTION
