@@ -8,6 +8,8 @@ import Bootstrap.Accordion as Accordion
 type Msg =
   None
   | Tick Time Time
+  | SaveInterval Time Time
+  | ApplyModel (Maybe SerializedModel)
   | Click
   | Purchase ShopItem
   | ClickerAccordion Accordion.State

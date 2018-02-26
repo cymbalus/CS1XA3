@@ -115,7 +115,7 @@ clickerCard model (c, q, m) =
       [ Accordion.block []
         [ Card.text []
           [ p [style (codeText ++ [("color", darkTheme.text)])]
-              [ text "{- This is some lengthy description of this particular auto clicker and what it does. -}"]
+              [ text ("{- " ++ (Clickers.description c) ++ " -}")]
           , p [style (codeText ++ [("color", darkTheme.text_blue)])]
               [ text "cost"
               , span [style (codeText ++ [("color", darkTheme.text)])]
