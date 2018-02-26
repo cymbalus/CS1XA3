@@ -72,7 +72,7 @@ cost clicker amt =
       ResearchTeam ->
         defaultInc 5000000 amt
       AGI ->
-        defaultInc 1010011010 amt
+        defaultInc (100^5) amt
 
 {-| Returns the base loc earnings per second for a Clicker
 -}
@@ -81,14 +81,14 @@ earnings clicker = case clicker of
   Macro ->
     0.5
   BashScript ->
-    8.0
+    5.0
   UndergradStudent ->
-    30.0
+    20.0
   GradStudent ->
-    80.0
+    50.0
   Professor ->
-    200.0
+    1000.0
   ResearchTeam ->
-    4000.0
+    25000.0
   AGI ->
-    1048576.0
+    50000000.0

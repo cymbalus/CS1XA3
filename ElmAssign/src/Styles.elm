@@ -6,6 +6,9 @@ darkTheme =
   { background = "#282A34"
   , sidebar = "#21232b"
   , text = "#ABAEBF"
+  , text_blue = "#61AFEF"
+  , text_orange = "#D19A66"
+  , text_green = "#98C379"
   , textbox = "#d1d1e0"
   }
 
@@ -24,10 +27,10 @@ gridCol =
 {- Sidebar -}
 
 sideCol = gridCol ++
-  [ ("border-left", "1px solid black")
-  , ("border-right", "1px solid black")
+  [ ("border-left", "2px solid black")
+  , ("border-right", "2px solid black")
   , ("background-color", darkTheme.sidebar)
-  , ("box-shadow", "0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4)")
+  , ("overflow-y", "auto")
   ]
 
 sideTitleDiv =
@@ -36,7 +39,7 @@ sideTitleDiv =
 
 sideTitleText =
   [ ("text-align", "center")
-  , ("font-family", "Fira")
+  , ("font-family", "Fira Mono")
   , ("font-size", "24px")
   , ("color", "white")
   ]
@@ -53,7 +56,7 @@ curtisImg =
 
 locRateText =
   [ ("text-align", "center")
-  , ("font-family", "Fira")
+  , ("font-family", "Fira Mono")
   , ("font-size", "32px")
   , ("color", darkTheme.text)
   , ("margin-top", "180px")
@@ -76,7 +79,7 @@ earningIcon =
 
 earningColumn =
   [ ("padding-top", "15px")
-  , ("background-color", "#4f5164")
+  , ("background-color", "#2d2f39")--"#4f5164")
   , ("border", "1px solid black")
   , ("border-radius", "5px")
   , ("box-shadow", "0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4)")
@@ -84,7 +87,7 @@ earningColumn =
 
 earningText =
   [ ("text-align", "center")
-  , ("font-family", "Fira")
+  , ("font-family", "Fira Mono")
   , ("font-size", "24px")
   , ("color", darkTheme.text)
   , ("margin", "5px")
@@ -100,4 +103,12 @@ card =
   [ ("border", "0")
   , ("background-color", darkTheme.background)
   , ("border-bottom", "1px solid " ++ darkTheme.text)
+  ]
+
+codeText =
+  [ ("font-family", "Fira Mono")
+  , ("font-size", "12px")
+  , ("margin", "3px")
+  , ("margin-left", "0px")
+  , ("margin-right", "0px")
   ]

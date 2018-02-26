@@ -36,7 +36,7 @@ view model =
                 , clickerAccordion model
                 ]
             , Grid.col [Col.xs8, Col.attrs [style gridCol]] [ centerDiv model ]
-            , Grid.col [Col.xs2, Col.attrs [style sideCol]] [ text "One of Three columns" ]
+            , Grid.col [Col.xs2, Col.attrs [style sideCol]] [ text (toString model) ]
             ]
         ]
       , earningsPanel model
@@ -54,7 +54,7 @@ earningsPanel model =
   div [style earningPanelDiv]
       [ Grid.container [style gridContainer]
         [ Grid.row [Row.centerXs, Row.attrs [style [("margin", "0px"), ("padding", "0px")]]]
-            (List.map (earningCol model) (Models.formattedEarnings model))
+            (List.map (earningCol model) (Models.formattedLoc model.loc_counter))
         ]
       ]
 
@@ -72,7 +72,7 @@ earningCol model (title, titles, amt, image) =
 clickerDiv : Model -> ClickerData -> Html Msg
 clickerDiv model (c, q, m) =
   div []
-      [ text ((toString c) ++ " |#| Cost: " ++ (toString (Clickers.cost c q)) ++ " Q: " ++ (toString q) ++ " M: " ++ (toString m))
+      [ text ((toString c) ++ " |#| Cost: " ++ (toString (Clickers.cost c)) ++ " Q: " ++ (toString q) ++ " M: " ++ (toString m))
       , br [] []
       , button [ disabled (not (Shop.canAfford model (ClickerItem c)))
                , onClick (Msgs.Purchase (ClickerItem c)) ]
@@ -97,6 +97,11 @@ clickerAccordion model =
 
 clickerCard : Model -> ClickerData -> Accordion.Card Msg
 clickerCard model (c, q, m) =
+  let
+    (cost, costType) = Models.reducedLocFormat (toFloat (Clickers.cost c q))
+    (earnings, earningsType) = Models.reducedLocFormat (Clickers.earnings c)
+    (totEarnings, totEarningsType) = Models.reducedLocFormat (Models.clickerEarnings model c)
+  in
   Accordion.card
     { id = Clickers.name c False
     , options = [Card.attrs [style card]]
@@ -107,12 +112,60 @@ clickerCard model (c, q, m) =
               [ text (toString q) ]
           ]
     , blocks =
-        [ Accordion.block []
-            [ Card.text []
-              [ button [ disabled (not (Shop.canAfford model (ClickerItem c)))
-                       , onClick (Msgs.Purchase (ClickerItem c)) ]
-                       [ text "Buy" ]
+      [ Accordion.block []
+        [ Card.text []
+          [ p [style (codeText ++ [("color", darkTheme.text)])]
+              [ text "{- This is some lengthy description of this particular auto clicker and what it does. -}"]
+          , p [style (codeText ++ [("color", darkTheme.text_blue)])]
+              [ text "cost"
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text " = ("]
+              , span [style (codeText ++ [("color", darkTheme.text_orange)])]
+                  [text (toString cost)]
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text ", "]
+              , span [style (codeText ++ [("color", darkTheme.text_green)])]
+                  [text ("\"" ++ costType ++ "\"")]
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text ")"]
               ]
-            ]
+          , p [style (codeText ++ [("color", darkTheme.text_blue)])]
+              [ text "baseEarnings"
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text " = ("]
+              , span [style (codeText ++ [("color", darkTheme.text_orange)])]
+                  [text (toString earnings)]
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text ", "]
+              , span [style (codeText ++ [("color", darkTheme.text_green)])]
+                  [text ("\"" ++ earningsType ++ "\"")]
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text ")"]
+              ]
+          , p [style (codeText ++ [("color", darkTheme.text_blue)])]
+              [ text "earningMultiplier"
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text " = "]
+              , span [style (codeText ++ [("color", darkTheme.text_orange)])]
+                  [text (toString (m))]
+              ]
+          , p [style (codeText ++ [("color", darkTheme.text_blue)])]
+              [ text "totalEarnings"
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text " = ("]
+              , span [style (codeText ++ [("color", darkTheme.text_orange)])]
+                  [text (toString totEarnings)]
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text ", "]
+              , span [style (codeText ++ [("color", darkTheme.text_green)])]
+                  [text ("\"" ++ totEarningsType ++ "\"")]
+              , span [style (codeText ++ [("color", darkTheme.text)])]
+                  [text ")"]
+              ]
+          , button [ disabled (not (Shop.canAfford model (ClickerItem c)))
+              , onClick (Msgs.Purchase (ClickerItem c)) ]
+              [ text "Buy" ]
+          ]
         ]
+      ]
     }
