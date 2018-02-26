@@ -18,6 +18,7 @@ then
 	while read -r file
 	do	
 		echo -e "\n\n########## $file ##########\n\n" >> changes.log
+		# -U0 removes context and the grep further trims the output so we only get the pure changes
 		echo "$(git diff -U0 "$file" | grep "^[@,+,-]")" >> changes.log
 	done <<< "$DIFF"
 	if [ "$OUTPUT" = "true" ]
