@@ -2,13 +2,14 @@
 
 if [ $# -gt 0 ]
 then
-	if [ -f ProjectAnalyze/bin/"$1".sh ]
+	if [ -f ProjectAnalyze/bin/"$1".sh ] # Checks if command matches file in bin 
 	then
-		sh ProjectAnalyze/bin/"$1".sh ${@:2}
+		sh ProjectAnalyze/bin/"$1".sh ${@:2} 
 	elif [ "$1" = "help" ]
 	then
 		cd ProjectAnalyze/usage
 		shopt -s nullglob
+		# Loop through usage files and cat contents
 		find . -name "*.txt" -print0 |
 			while IFS='' read -r -d $'\0' file
 			do

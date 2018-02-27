@@ -17,5 +17,6 @@ shopt -s nullglob
 find . -name "*.txt" -print0 |
 	while IFS='' read -r -d $'\0' file
 	do
+		# Format the fitst line as a h3
 		echo -e "\n### $(cat "$file")" >> "../../"$FILE""
 	done

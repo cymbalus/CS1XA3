@@ -15,6 +15,7 @@ shopt -s nullglob
 find . -name "*.hs" -print0 |
 	while IFS='' read -r -d $'\0' file
 	do
+		# 2>> only redirects errors, so compilation info will still be put to stdout
 		ghc -fno-code "$file" 2>> errors.log
 	done
 
