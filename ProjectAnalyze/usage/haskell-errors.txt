@@ -1,0 +1,17 @@
+haskell-errors - USAGE INSTRUCTIONS
+
+	DESCRIPTION
+
+		Searches for haskell (*.hs) files in the project directory and compiles each
+		to test for errors. Any errors found are stored in errors.log.
+
+	COMMAND
+
+		./ProjectAnalyze.sh haskell-errors [FLAGS]
+
+	FLAGS
+
+		-o - OPTIONAL
+
+			Outputs the contents of error.log upon completion
+

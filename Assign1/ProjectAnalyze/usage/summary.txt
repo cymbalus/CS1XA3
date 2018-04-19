@@ -1,0 +1,10 @@
+summary - USAGE INSTRUCTIONS
+
+	DESCRIPTION
+
+		Displays various summary information about your project
+
+	COMMAND
+
+		./ProjectAnalyze.sh summary
+

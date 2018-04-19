@@ -1,0 +1,16 @@
+changes - USAGE INSTRUCTIONS
+		
+	DESCRIPTION
+		
+		Uses 'git diff' to extract uncommitted changes and places them in changes.log
+	
+	COMMAND
+
+		./ProjectAnalyze.sh changes [FLAGS]
+
+	FLAGS
+	
+		-o - OPTIONAL
+
+			Outputs the contents of changes.log upon completion
+
