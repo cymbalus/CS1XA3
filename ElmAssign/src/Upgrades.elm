@@ -10,6 +10,21 @@ list = [
   , Coffee
   ]
 
+-- Serialize Upgrades
+toInt : Upgrade -> Int
+toInt u = case u of
+  Ubuntu -> 0
+  Emacs -> 1
+  Coffee -> 2
+
+-- Deserialize upgrades
+fromInt : Int -> Maybe Upgrade
+fromInt i = case i of
+  0 -> Just Ubuntu
+  1 -> Just Emacs
+  2 -> Just Coffee
+  _ -> Nothing
+
 modifiers : Upgrade -> (List Clicker, Float)
 modifiers upgrade = case upgrade of
   Ubuntu ->

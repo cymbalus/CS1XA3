@@ -3,6 +3,7 @@ module Clickers exposing (..)
 import List exposing (map)
 import Types exposing (..)
 
+list : List Clicker
 list = [
   Macro
   , BashScript
@@ -24,6 +25,29 @@ quantity (_, q, _) = q
 
 multiplier : ClickerData -> Float
 multiplier (_, _, m) = m
+
+-- Serialize clickers
+toInt : Clicker -> Int
+toInt c = case c of
+  Macro -> 0
+  BashScript -> 1
+  UndergradStudent -> 2
+  GradStudent -> 3
+  Professor -> 4
+  ResearchTeam -> 5
+  AGI -> 6
+
+-- Deserialize clickers
+fromInt : Int -> Maybe Clicker
+fromInt i = case i of
+  0 -> Just Macro
+  1 -> Just BashScript
+  2 -> Just UndergradStudent
+  3 -> Just GradStudent
+  4 -> Just Professor
+  5 -> Just ResearchTeam
+  6 -> Just AGI
+  _ -> Nothing
 
 {-| Returns the friendly name of a Clicker.
 Either in the plural (True) or singular (False) form
@@ -49,6 +73,26 @@ name clicker plural =
             "Artificial General Intelligence"
   in
     s ++ if plural then "s" else ""
+
+{-| Returns the description/flavour text of a clicker
+-}
+description : Clicker -> String
+description clicker =
+  case clicker of
+    Macro ->
+      "Macro"
+    BashScript ->
+      "Bash Script"
+    UndergradStudent ->
+      "Undergrad Student"
+    GradStudent ->
+      "Grad Student"
+    Professor ->
+      "Professor"
+    ResearchTeam ->
+      "Research Team"
+    AGI ->
+      "Artificial General Intelligence"
 
 {-| Returns the purchase cost of a Clicker, given
 that some quantity has already been purchased
